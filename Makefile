@@ -9,10 +9,10 @@ CFLAGS = -c -Wall -O3
 
 all: maggot
 
-gonsnake: maggot.o
+maggot: maggot.o
 	$(CC) maggot.o -o maggot
 
-gonsnake.o: gonsnake.c
+maggot.o: maggot.c
 	$(CC) $(CFLAGS) maggot.c
 
 clean:
