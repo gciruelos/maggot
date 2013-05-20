@@ -10,6 +10,10 @@ How to use
 
 The gameplay is pretty obvious, you can play with WASD or with the arrows.
 
+Packages
+--------
+[Arch User Repository](https://aur.archlinux.org/packages/maggot-git/ "AUR")
+
 License
 -------
 
