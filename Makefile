@@ -14,5 +14,6 @@ gonsnake: maggot.o
 
 gonsnake.o: gonsnake.c
 	$(CC) $(CFLAGS) maggot.c
+
 clean:
 	rm -rf *o maggot
