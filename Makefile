@@ -12,7 +12,7 @@ all: maggot
 maggot: maggot.o
 	$(CC) maggot.o -o maggot
 
-maggot.o: maggot.c
+maggot.o: src/maggot.c src/maggot.h
 	$(CC) $(CFLAGS) src/maggot.c
 
 clean:
