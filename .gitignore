@@ -15,3 +15,8 @@
 *.exe
 *.out
 *.app
+
+# Specific executables and packages
+debug_maggot
+maggot
+/packages

@@ -18,7 +18,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
  
-#include "gonsnake.h"
+#include "maggot.h"
 
 int map[MAPH+2][MAPH+2];
 
@@ -139,7 +139,7 @@ int printmap(){
 		for (x = 0;; x++){
 			if (map[y][x] == 'E'){
 				points = lenofsnake()*lenofsnake()/4-6;
-				printf("\n\t\t\033[1;37mPoints: %d Velocity: %f\x1b[0m\t\n", points, velocity);
+				printf("\n\t\t\033[1;37mPoints: %d\x1b[0m\t\n", points);
 				return 0;
 			}
 			else if (istheresnake(y, x)){
