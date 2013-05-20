@@ -13,7 +13,7 @@ maggot: maggot.o
 	$(CC) maggot.o -o maggot
 
 maggot.o: maggot.c
-	$(CC) $(CFLAGS) maggot.c
+	$(CC) $(CFLAGS) src/maggot.c
 
 clean:
 	rm -rf *o maggot
