@@ -9,6 +9,7 @@ How to use
 ![A screenshot of the gameplay](/img/example.png "Screenshot")
 
 The gameplay is pretty obvious, you can play with WASD or with the arrows.
+You can also pause the game with "p", and look for some info about the game with "i".
 
 Packages
 --------
