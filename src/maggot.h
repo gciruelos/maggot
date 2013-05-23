@@ -40,6 +40,8 @@
 #define FOOD '@'
 #define WALL '$'
 
+#define VERSION "0.0.3"
+
 void init_snake();
 void init_map();
 int printmap();

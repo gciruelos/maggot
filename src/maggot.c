@@ -52,11 +52,12 @@ int main (){
 			printmap();
 			nanosleep(&delay, NULL);
 			isupdated = 0;
-			fflush(stdin);
 			velocity = sqrt(lenofsnake())+0.5;
 		}
 		turn(getch());
+		fflush(stdin);
 		isupdated = 1;
+		continue;
 	}
 	
 	
@@ -249,27 +250,25 @@ void grow(void){
 
 
 void newfood(void){
-	int tocontinue = 0;
+	int tocontinue;
 	
 	map[foody][foodx] = ' ';
 	
 	while (1){
+		tocontinue = 0;
 		foodx = rand_lim(MAPH-2)+1;
 		foody = rand_lim(MAPH-2)+1;
 		
 		if (map[foody][foodx]==WALL){
-			tocontinue = 1;
+			continue;
 		}
 		
-		/* CAUSES A BUG
-		 * else{
-			int i
-			for (i = 0; snake[i][0]; i++){
-				if (foodx==snake[i][0] && foody==snake[i][1]){
-					tocontinue = 1;
-				}
+		int i;
+		for (i = 0; snake[i][0]; i++){
+			if (foodx==snake[i][0] && foody==snake[i][1]){
+				tocontinue = 1;
 			}
-		}*/
+		}
 		
 		if (tocontinue){
 			continue;
@@ -389,7 +388,6 @@ void move(){
 			end(1);
 		}
 	}
-	
 }
 
 
@@ -410,8 +408,11 @@ void info(void){
 	system("clear");
 	
 	printf("\n");
+	printf("maggot - A simple snake game written in C.\n");
+	printf("Version: %s\n", VERSION);
 	printf("Author: Gonzalo Ciruelos <comp.gonzalo@gmail.com>\n");
 	printf("License: GPL v2\n");
+	
 	
 	while (1){
 		if (getch()){
