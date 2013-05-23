@@ -1,5 +1,5 @@
 /*
- * maggot - A simple snake game written in C.
+ * maggot - Simple snake game written in C.
  * 
  * Copyright (C) 2013  Gonzalo Ciruelos
  *
@@ -408,7 +408,7 @@ void info(void){
 	system("clear");
 	
 	printf("\n");
-	printf("maggot - A simple snake game written in C.\n");
+	printf("maggot - Simple snake game written in C.\n");
 	printf("Version: %s\n", VERSION);
 	printf("Author: Gonzalo Ciruelos <comp.gonzalo@gmail.com>\n");
 	printf("License: GPL v2\n");

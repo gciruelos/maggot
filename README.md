@@ -1,7 +1,7 @@
 maggot
 ======
 
-A simple snake game written in C.
+Simple snake game written in C. It aims to follow the KISS philosophy.
 
 How to use
 ----------

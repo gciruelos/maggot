@@ -1,5 +1,5 @@
 /*
- * maggot - A simple snake game written in C.
+ * maggot - Simple snake game written in C.
  * 
  * Copyright (C) 2013  Gonzalo Ciruelos
  *
