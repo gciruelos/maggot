@@ -444,11 +444,7 @@ void end(int what){
 	 
 }
 
-/*
- * include <math.h>
- * and for compiling: gcc -lm
- * instead of doing your own sqrt
- */
+
 double sqrt(float n){
 	/* Babylonian method*/
 	float iter, x = 1;
