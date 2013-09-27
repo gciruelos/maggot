@@ -233,18 +233,28 @@ void grow(void){
 	for (index = 1; snake[index][0]; index++){
 		;
 	}
-	
-	if (snake_direction==1){
-		snake[index][0]=snake[index-1][0]; snake[index][0] = snake[index-1][0]+1;
-	}
-	else if (snake_direction==2){
-		snake[index][0]=snake[index-1][0]-1; snake[index][0] = snake[index-1][0];
-	}
-	else if (snake_direction==3){
-		snake[index][0]=snake[index-1][0]; snake[index][0] = snake[index-1][0]-1;
-	}
-	else if (snake_direction==4){
-		snake[index][0]=snake[index-1][0]+1; snake[index][0] = snake[index-1][0];
+
+	// changed if/else if statement to switch.
+	switch(snake_direction) {
+	case 1:
+		snake[index][0]=snake[index-1][0];
+		snake[index][0] = snake[index-1][0]+1;
+		break;
+	case 2:
+		snake[index][0]=snake[index-1][0]-1;
+		snake[index][0] = snake[index-1][0];
+		break;
+	case 3:
+		snake[index][0]=snake[index-1][0];
+		snake[index][0] = snake[index-1][0]-1;
+		break;
+	case 4:
+		snake[index][0]=snake[index-1][0]+1;
+		snake[index][0] = snake[index-1][0];
+		break;
+	default:
+		// shouldn't be used...
+		break;
 	}
 }
 
@@ -283,58 +293,50 @@ void newfood(void){
 
 
 void turn(char input){
-	
-	if (input == 'q'){
+	// switch statement for input.
+	// did inverses for checking snake_direction,
+	//  no more empty statement.
+	switch(input) {
+	case 'q':
 		end(0);
-	}
-	else if (input == 'p'){
+		break; // shouldn't end up here
+	case 'p':
 		paused();
-	}
-	else if (input == 'i'){
+		break;
+	case 'i':
 		info();
-	}
-	
-	
-	else if (input == 27 || input == 91){
-		return; // void functions need to return nothing.
-	}
-	
-	if (input == UP || input==65){
-		if (snake_direction==1 || snake_direction==3){
-			;
-		}
-		else{
+		break;
+
+	case UP:
+	case 65:
+		if(snake_direction != 1 && snake_direction != 3)
 			snake_direction = 1;
-		}
-	}
-	else if (input==RIGHT || input==67){
-		if (snake_direction==2 || snake_direction==4){
-			;
-		}
-		else{
+		break;
+
+	case RIGHT:
+	case 67:
+		if(snake_direction != 2 && snake_direction != 4)
 			snake_direction = 2;
-		}
-	}
-	else if (input==DOWN || input==66){
-		if (snake_direction==1 || snake_direction==3){
-			;
-		}
-		else{
+		break;
+
+	case DOWN:
+	case 66:
+		if(snake_direction != 1 && snake_direction != 3)
 			snake_direction = 3;
-		}
-	}
-	else if (input==LEFT || input==68){
-		if (snake_direction==2 || snake_direction==4){
-			;
-		}
-		else{
+		break;
+
+	case LEFT:
+	case 68:
+		if(snake_direction != 2 && snake_direction != 4)
 			snake_direction = 4;
-		}
+		break;
+
+	case 27:
+	case 91:
+	default:
+		return;
 	}
-	else{
-		return; // void functions need to return nothing.
-	}
-	
+
 	move();
 }
 
@@ -352,30 +354,41 @@ int lenofsnake(){
 
 void move(){
 	int i, direction[2];
-	
-	if (snake_direction==1){
-		direction[0] = 0; direction[1] = -1;
+
+	// changed to a switch statement that will give
+	// direction a value even if snake_direction is
+	// not valid.
+	switch(snake_direction) {
+	case 1:
+		direction[0] = 0;
+		direction[1] = -1;
+		break;
+	case 2:
+		direction[0] = 1;
+		direction[1] = 0;
+		break;
+	case 3:
+		direction[0] = 0;
+		direction[1] = 1;
+		break;
+	case 4:
+		direction[0] = -1;
+		direction[1] = 0;
+		break;
+	default:
+		direction[0] = 0;
+		direction[1] = 0;
 	}
-	else if (snake_direction==2){
-		direction[0] = 1; direction[1] = 0;
-	}
-	else if (snake_direction==3){
-		direction[0] = 0; direction[1] = 1;
-	}
-	else if (snake_direction==4){
-		direction[0] = -1; direction[1] = 0;
-	}
-	
 	
 	for (i = lenofsnake()-1; i>0; i--){
-		snake[i][0] = snake[i-1][0];snake[i][1] = snake[i-1][1];
+		snake[i][0] = snake[i-1][0];
+		snake[i][1] = snake[i-1][1];
 	}
 	
-	snake[lenofsnake()][0] = 0; snake[lenofsnake()][1] = 0;
+	snake[lenofsnake()][0] = 0;
+	snake[lenofsnake()][1] = 0;
 
-	// direction[0] may not be initialized (if snake_direction < 1 or snake direction > 4).
 	snake[0][0] = snake[0][0]+direction[0];
-	// direction[1] is never initialized, random garbage.
 	snake[0][1] = snake[0][1]+direction[1];
 	
 	if (map[snake[0][1]][snake[0][0]] == FOOD){
@@ -444,23 +457,17 @@ void end(int what){
 	 
 }
 
-/*
- * include <math.h>
- * and for compiling: gcc -lm
- * instead of doing your own sqrt
- */
+// try to use math.h instead.
 double sqrt(float n){
 	/* Babylonian method*/
-	float iter, x = 1;
-	// iter not initialized, use a for loop instead!
-	//  and you don't need iter to be a float.
-	/*
-	 * for(int iter = 0; iter < 100; iter++)
-	 */
-	while (iter<100){
-		x = x/2 + n/(2*x);
-		iter++;
+	float x = 1;
+	int iter;
+
+	// changed while loop to for loop.
+	for(iter = 0; iter < 100; iter++) {
+		x = x / 2 + n / (2 * x);
 	}
+
 	return x;
 }
 
