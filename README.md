@@ -15,6 +15,11 @@ Packages
 --------
 [Arch User Repository](https://aur.archlinux.org/packages/maggot-git/ "AUR")
 
+Contributors
+------------
+* [Alexander Rødseth](https://github.com/xyproto)
+
+
 License
 -------
 
