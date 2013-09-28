@@ -253,37 +253,6 @@ kbhit ()
   return 0;
 }
 
-<<<<<<< HEAD
-void grow(void){
-	int index;
-	
-	for (index = 1; snake[index][0]; index++){
-		;
-	}
-
-	// changed if/else if statement to switch.
-	switch(snake_direction) {
-	case 1:
-		snake[index][0]=snake[index-1][0];
-		snake[index][0] = snake[index-1][0]+1;
-		break;
-	case 2:
-		snake[index][0]=snake[index-1][0]-1;
-		snake[index][0] = snake[index-1][0];
-		break;
-	case 3:
-		snake[index][0]=snake[index-1][0];
-		snake[index][0] = snake[index-1][0]-1;
-		break;
-	case 4:
-		snake[index][0]=snake[index-1][0]+1;
-		snake[index][0] = snake[index-1][0];
-		break;
-	default:
-		// shouldn't be used...
-		break;
-	}
-=======
 // Extend the snake
 void
 grow ()
@@ -292,6 +261,7 @@ grow ()
   switch (snake_direction)
     {
     case SNAKE_UP:
+      // over-writing the same value?
       snake[index][0] = snake[index - 1][0];
       snake[index][0] = snake[index - 1][0] + 1;
       break;
@@ -308,9 +278,9 @@ grow ()
       snake[index][0] = snake[index - 1][0];
       break;
     default:
-      return;
+      return; // I normally see this as a break,
+              //  unless you really want to exit the function early.
     }
->>>>>>> c7f36c1c1737abca7e94a171c5b51a7c79018fdc
 }
 
 // Place new food on the board
@@ -327,55 +297,6 @@ newfood (unsigned int map_height)
       foodx = rand_lim (map_height - 2) + 1;
       foody = rand_lim (map_height - 2) + 1;
 
-<<<<<<< HEAD
-void turn(char input){
-	// switch statement for input.
-	// did inverses for checking snake_direction,
-	//  no more empty statement.
-	switch(input) {
-	case 'q':
-		end(0);
-		break; // shouldn't end up here
-	case 'p':
-		paused();
-		break;
-	case 'i':
-		info();
-		break;
-
-	case UP:
-	case 65:
-		if(snake_direction != 1 && snake_direction != 3)
-			snake_direction = 1;
-		break;
-
-	case RIGHT:
-	case 67:
-		if(snake_direction != 2 && snake_direction != 4)
-			snake_direction = 2;
-		break;
-
-	case DOWN:
-	case 66:
-		if(snake_direction != 1 && snake_direction != 3)
-			snake_direction = 3;
-		break;
-
-	case LEFT:
-	case 68:
-		if(snake_direction != 2 && snake_direction != 4)
-			snake_direction = 4;
-		break;
-
-	case 27:
-	case 91:
-	default:
-		return;
-	}
-
-	move();
-}
-=======
       if (map[foody][foodx] == WALL_SYMBOL)
 	{
 	  continue;
@@ -394,7 +315,6 @@ void turn(char input){
 	  break;
 	}
     }
->>>>>>> c7f36c1c1737abca7e94a171c5b51a7c79018fdc
 
   map[foody][foodx] = FOOD_SYMBOL;
 }
@@ -460,59 +380,6 @@ lenofsnake ()
   return i;
 }
 
-<<<<<<< HEAD
-void move(){
-	int i, direction[2];
-
-	// changed to a switch statement that will give
-	// direction a value even if snake_direction is
-	// not valid.
-	switch(snake_direction) {
-	case 1:
-		direction[0] = 0;
-		direction[1] = -1;
-		break;
-	case 2:
-		direction[0] = 1;
-		direction[1] = 0;
-		break;
-	case 3:
-		direction[0] = 0;
-		direction[1] = 1;
-		break;
-	case 4:
-		direction[0] = -1;
-		direction[1] = 0;
-		break;
-	default:
-		direction[0] = 0;
-		direction[1] = 0;
-	}
-	
-	for (i = lenofsnake()-1; i>0; i--){
-		snake[i][0] = snake[i-1][0];
-		snake[i][1] = snake[i-1][1];
-	}
-	
-	snake[lenofsnake()][0] = 0;
-	snake[lenofsnake()][1] = 0;
-
-	snake[0][0] = snake[0][0]+direction[0];
-	snake[0][1] = snake[0][1]+direction[1];
-	
-	if (map[snake[0][1]][snake[0][0]] == FOOD){
-		grow();
-		newfood();
-	}
-	else if (map[snake[0][1]][snake[0][0]] != ' '){
-		end(1);
-	}
-	for (i = 1; snake[i][0]; i++){
-		if (snake[0][0]==snake[i][0] && snake[0][1]==snake[i][1]){
-			end(1);
-		}
-	}
-=======
 // Move the snake one step
 void
 move (unsigned int map_height)
@@ -570,7 +437,6 @@ move (unsigned int map_height)
 	  end (1);
 	}
     }
->>>>>>> c7f36c1c1737abca7e94a171c5b51a7c79018fdc
 }
 
 // Output when the game is paused
@@ -614,20 +480,6 @@ info (void)
   wait_for_key (0, true);
 }
 
-<<<<<<< HEAD
-// try to use math.h instead.
-double sqrt(float n){
-	/* Babylonian method*/
-	float x = 1;
-	int iter;
-
-	// changed while loop to for loop.
-	for(iter = 0; iter < 100; iter++) {
-		x = x / 2 + n / (2 * x);
-	}
-
-	return x;
-=======
 // Output the end screen
 void
 end (bool dead)
@@ -645,7 +497,6 @@ end (bool dead)
   printf ("\nPOINTS: %d\n\n\n", points);
 
   exit (0);
->>>>>>> c7f36c1c1737abca7e94a171c5b51a7c79018fdc
 }
 
 // Alternative square root function
