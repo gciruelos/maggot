@@ -1,1 +1,7 @@
-gcc -g -Wall -Wpedantic src/maggot.c -o debug_maggot && gdb debug_maggot
+#!/bin/sh
+mkdir -p build
+cd build
+cmake -DCMAKE_BUILD_TYPE=Debug ../src
+make
+gdb maggot
+cd ..
