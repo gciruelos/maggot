@@ -18,6 +18,7 @@ Packages
 Contributors
 ------------
 * [Alexander Rødseth](https://github.com/xyproto)
+* [Chris](https://github.com/damikin)
 
 
 License
