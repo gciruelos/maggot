@@ -254,6 +254,15 @@ kbhit ()
 }
 
 // Extend the snake
+
+/* take a look at the commented out statements carefully.
+ * they are all over-writing the same values.
+ * the commented out statements aren't needed.
+ *
+ * normally defaults just break unless you want to
+ *  really exit the function early.  This can be
+ *  considered more of a style arguement though.
+ */
 void
 grow ()
 {
@@ -261,20 +270,20 @@ grow ()
   switch (snake_direction)
     {
     case SNAKE_UP:
-      snake[index][0] = snake[index - 1][0];
+//      snake[index][0] = snake[index - 1][0];
       snake[index][0] = snake[index - 1][0] + 1;
       break;
     case SNAKE_RIGHT:
       snake[index][0] = snake[index - 1][0] - 1;
-      snake[index][0] = snake[index - 1][0];
+//      snake[index][0] = snake[index - 1][0];
       break;
     case SNAKE_DOWN:
-      snake[index][0] = snake[index - 1][0];
+//      snake[index][0] = snake[index - 1][0];
       snake[index][0] = snake[index - 1][0] - 1;
       break;
     case SNAKE_LEFT:
       snake[index][0] = snake[index - 1][0] + 1;
-      snake[index][0] = snake[index - 1][0];
+//      snake[index][0] = snake[index - 1][0];
       break;
     default:
       return;
@@ -318,6 +327,12 @@ newfood (unsigned int map_height)
 }
 
 // Handle keypresses
+
+/*
+ * if you want KEY_ESC to end it (like 'q'),
+ *  then you should have it next to case 'q'.
+ *  not sure if that is the desired effect.
+ */
 void
 turn (char input, int map_height)
 {
@@ -447,6 +462,12 @@ paused ()
 }
 
 // Wait for a given key, or any if 'any' is true
+
+/* normally you will pull the character out of getch() first
+ *  and store it in a local variable to test.  luckily
+ *  (any && getch ()) will only take a character if any is true.
+ *  Not sure if intentional or not.
+ */
 void
 wait_for_key (char k, bool any)
 {
@@ -498,15 +519,18 @@ end (bool dead)
 }
 
 // Alternative square root function
+
+/* changed while loop to for loop
+ */
 double
 my_sqrt (float n)
 {
   // Babylonian method
-  float iter = 0, x = 1;
-  while (iter < 100)
+  float x = 1;
+  int iter;
+  for (iter = 0; iter < 100; iter++)
     {
       x = x / 2 + n / (2 * x);
-      iter++;
     }
   return x;
 }
