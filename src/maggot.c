@@ -498,9 +498,32 @@ void end (bool dead)
 	{
 		printf ("\nTHANKS FOR PLAYING\n");
 	}
-	printf ("\nPOINTS: %d\n\n\n", points);
+	printf ("\nPOINTS: %d\n\n", points);
+	
+	//Prompts user to restart the game if he/she chooses too
+	if(dead)
+	{
+		printf("Replay? Y/N \n");
+		char replay = getchar();
+		if(replay == 'Y' || replay == 'y')
+		{
+			printf("Restarting\n");
+			init_snake ();
+	                init_map (MAP_HEIGHT);
 
-	exit (0);
+        	        struct timespec delay;
+			delay.tv_sec = 0;
+			delay.tv_nsec = 500000000L / velocity;
+
+			bool isupdated = false;
+
+		}
+
+		else if(replay == 'N' || replay == 'n')
+			exit(0);
+		else
+			exit(0);
+	}
 }
 
 // Alternative square root function
@@ -520,8 +543,7 @@ double my_sqrt (float n)
 }
 
 // Function for retrieving random numbers
-int
-rand_lim (int limit)
+int rand_lim (int limit)
 {
   // http://stackoverflow.com/questions/2999075/generate-a-random-number-within-range/2999130#2999130
   // Somewhat modified.
@@ -539,36 +561,39 @@ rand_lim (int limit)
 
 int main ()
 {
-	srand ((unsigned int) time (0));
-
-	init_snake ();
-	init_map (MAP_HEIGHT);
-
-	struct timespec delay;
-	delay.tv_sec = 0;
-	delay.tv_nsec = 500000000L / velocity;
-
-	bool isupdated = false;
-
-	while (1)
+	while(1)
 	{
-		while (!kbhit ())
-		{
-			if (!isupdated)
-			{
-				move (MAP_HEIGHT);
-			}
-			system ("clear");
-			printmap ();
-			nanosleep (&delay, NULL);
-			isupdated = false;
-			velocity = my_sqrt (lenofsnake ()) + 0.5;
-		}
-		turn (getch (), MAP_HEIGHT);
-		fflush (stdin);
-		isupdated = true;
-		continue;
-	}
+		printf("Starting new session\n");
+		srand ((unsigned int) time (0));
 
-	return 0;
+		init_snake ();
+		init_map (MAP_HEIGHT);
+
+		struct timespec delay;
+		delay.tv_sec = 0;
+		delay.tv_nsec = 500000000L / velocity;
+
+		bool isupdated = false;
+
+		while (1)
+		{
+			while (!kbhit ())
+			{
+				if (!isupdated)
+				{
+					move (MAP_HEIGHT);
+				}
+				system ("clear");
+				printmap ();
+				nanosleep (&delay, NULL);
+				isupdated = false;
+				velocity = my_sqrt (lenofsnake ()) + 0.5;
+			}
+			turn (getch (), MAP_HEIGHT);
+			fflush (stdin);
+			isupdated = true;
+			continue;
+		}
+	}
+		return 0;
 }
