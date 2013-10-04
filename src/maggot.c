@@ -524,6 +524,8 @@ void end (bool dead)
 		else
 			exit(0);
 	}
+	else
+		exit(0);
 }
 
 // Alternative square root function
