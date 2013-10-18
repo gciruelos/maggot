@@ -485,6 +485,19 @@ void info (void)
 	wait_for_key (0, true);
 }
 
+//Completely resets the snake to zero
+void resetSnake()
+{
+	int indexOne;
+	
+	for(indexOne = 0; indexOne < 2; indexOne++) 
+	{
+		int indexTwo;
+		for(indexTwo = 0; indexTwo<400; indexTwo++)
+			snake[indexTwo][indexOne]=0;
+	}
+}
+
 // Output the end screen
 void end (bool dead)
 {
@@ -508,14 +521,14 @@ void end (bool dead)
 		if(replay == 'Y' || replay == 'y')
 		{
 			printf("Restarting\n");
+
+			resetSnake();
 			init_snake ();
 	                init_map (MAP_HEIGHT);
 
         	        struct timespec delay;
 			delay.tv_sec = 0;
 			delay.tv_nsec = 500000000L / velocity;
-
-			bool isupdated = false;
 
 		}
 
@@ -563,39 +576,38 @@ int rand_lim (int limit)
 
 int main ()
 {
-	while(1)
+
+	printf("Starting new session\n");
+	srand ((unsigned int) time (0));
+
+	init_snake ();
+	init_map (MAP_HEIGHT);
+
+	struct timespec delay;
+	delay.tv_sec = 0;
+	delay.tv_nsec = 500000000L / velocity;
+
+	bool isupdated = false;
+
+	while (1)
 	{
-		printf("Starting new session\n");
-		srand ((unsigned int) time (0));
-
-		init_snake ();
-		init_map (MAP_HEIGHT);
-
-		struct timespec delay;
-		delay.tv_sec = 0;
-		delay.tv_nsec = 500000000L / velocity;
-
-		bool isupdated = false;
-
-		while (1)
+		while (!kbhit ())
 		{
-			while (!kbhit ())
+			if (!isupdated)
 			{
-				if (!isupdated)
-				{
-					move (MAP_HEIGHT);
-				}
-				system ("clear");
-				printmap ();
-				nanosleep (&delay, NULL);
-				isupdated = false;
-				velocity = my_sqrt (lenofsnake ()) + 0.5;
+				move (MAP_HEIGHT);
 			}
-			turn (getch (), MAP_HEIGHT);
-			fflush (stdin);
-			isupdated = true;
-			continue;
+			system ("clear");
+			printmap ();
+			nanosleep (&delay, NULL);
+			isupdated = false;
+			velocity = my_sqrt (lenofsnake ()) + 0.5;
 		}
+		turn (getch (), MAP_HEIGHT);
+		fflush (stdin);
+		isupdated = true;
+		continue;
 	}
-		return 0;
+	
+	return 0;
 }
