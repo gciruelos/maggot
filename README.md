@@ -19,6 +19,7 @@ Contributors
 ------------
 * [Alexander Rødseth](https://github.com/xyproto)
 * [Chris](https://github.com/damikin)
+* [Manuel Gonzales](https://github.com/macleod2486)
 
 
 License
