@@ -27,4 +27,4 @@ License
 
 See the LICENSE.md file.
 
-Copyright (C) 2013 Gonzalo Ciruelos <comp.gonzalo@gmail.com>
+Copyright (C) 2013 Gonzalo Ciruelos <gonzalo.ciruelos@gmail.com>
